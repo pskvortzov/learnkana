@@ -4,8 +4,9 @@ const glyph = document.querySelector('#glyph');
 const click = document.querySelector('#click');
 const reading = document.querySelector('#reading');
 const buttons = document.querySelector('#buttons');
+const checkbox = document.querySelector('#checkbox');
 
-let kana, keys, randomIndex, currentGlyph, currentSyllable, variants, speechStartGlyph, speechEndGlyph;
+let learningMode, kana, allKeys, previousRound, keys, randomIndex, previousGlyph, currentGlyph, currentSyllable, variants, speechStartGlyph, speechEndGlyph;
 
 let lastPressedKeys = [];
 
@@ -27,11 +28,23 @@ recognition.addEventListener('end', recognition.start);
 
 function getRandomGlyph() {
 	if (keys.length == 0) {
-		keys = Object.keys(kana);
+		if (learningMode && allKeys.length > 0) {
+			const rand = Math.floor(Math.random() * allKeys.length);
+			keys = previousRound.concat(allKeys[rand]);
+			previousRound = [...keys];
+			allKeys.splice(allKeys.indexOf(allKeys[rand]), 1);
+		} else {
+			keys = Object.keys(kana);
+		}
 	}
 
 	randomIndex = Math.floor(Math.random() * keys.length);
 	currentGlyph = keys[randomIndex];
+
+	if (currentGlyph === previousGlyph) {
+		getRandomGlyph();
+	}
+
 	currentSyllable = kana[currentGlyph];
 	variants = getPronunciationVariants(currentSyllable);
 	speechEndGlyph = currentGlyph;
@@ -40,10 +53,14 @@ function getRandomGlyph() {
 }
 
 function correctAnswer() {
+	previousGlyph = currentGlyph;
+
 	lastPressedKeys = [];
 	recognition.abort();
 	click.play();
+
 	keys.splice(randomIndex, 1);
+
 	getRandomGlyph();
 }
 
@@ -55,14 +72,26 @@ function wrongAnswer() {
 }
 
 function pressButton(event) {
+	learningMode = checkbox.querySelector('input').checked;
+
 	kana = getKana(event.target.dataset.option);
 	keys = Object.keys(kana);
+
+	if (learningMode) {
+		const rand = Math.floor(Math.random() * keys.length);
+		allKeys = [...keys];
+		keys = [keys[rand]];
+		previousRound = [...keys];
+
+		allKeys.splice(allKeys.indexOf(keys[0]), 1);
+	}
 
 	recognition.start();
 
 	getRandomGlyph();
 
 	buttons.style.display = 'none';
+	checkbox.style.display = 'none';
 	glyph.style.display = 'block';
 	glyph.style.opacity = 1;
 }
@@ -74,7 +103,7 @@ function pressKey(event) {
 		lastPressedKeys.shift();
 	}
 
-	if (lastPressedKeys.slice(-currentSyllable.length).join('').toLowerCase() == currentSyllable) {
+	if (currentSyllable && lastPressedKeys.slice(-currentSyllable.length).join('').toLowerCase() == currentSyllable) {
 		correctAnswer();
 	}
 };

@@ -24,7 +24,7 @@ body {
 }
 
 #buttons {
-	padding-bottom: 25em;
+    margin-top: -20%;
 }
 
 #buttons button {
@@ -41,6 +41,17 @@ body {
 	border:  1px solid #bbb;
     background-color: #ddd;
     color: black;
+}
+
+#checkbox {
+    margin-top: 1em;
+    color: #666;
+    font-size: .8em;
+}
+
+
+#checkbox label, #checkbox input {
+    cursor:  pointer;
 }
 
 #glyph {
