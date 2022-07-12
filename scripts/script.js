@@ -155,7 +155,7 @@ function getKana(source) {
 		'katakana': {
 			'ア': 'a',
 			'カ': 'ka',
-			'サ': 'se',
+			'サ': 'sa',
 			'タ': 'ta',
 			'ナ': 'na',
 			'ハ': 'ha',
