@@ -1,0 +1,101 @@
+@font-face {
+	font-family: HentaiKana ;
+	src: url('../fonts/UniHentaiKana-Regular.woff') format('woff') ;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	font-family: sans-serif, HentaiKana;
+}
+
+#buttons {
+	padding-bottom: 25em;
+}
+
+#buttons button {
+    transition: all .3s;
+	cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    border-radius: 11px;
+    background-color: #eee;
+    color: #666;
+}
+
+#buttons button:hover {
+	border:  1px solid #bbb;
+    background-color: #ddd;
+    color: black;
+}
+
+#glyph {
+    transition: all .3s;
+	display: none;
+	opacity: 0;
+	position:  relative;
+	cursor: default;
+    user-select: none;
+}
+
+#kana {
+	line-height: 1em;
+	transition: all .3s;
+	font-size: 15em;
+}
+
+#glyph.wrong #kana {
+	color:  #ce2323;
+}
+
+#glyph:hover #kana {
+	opacity: .1;
+}
+
+#reading {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 5em;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all .3s;
+    opacity: 0;
+    text-transform: uppercase;
+}
+
+#glyph:hover #reading {
+	opacity: .8;
+}
+
+#createdby {
+    color: #ccc;
+    font-size: .7em;
+    position: absolute;
+    bottom: 15px;
+}
+
+#createdby a {
+    transition: all .3s;
+	color: #aaa;
+}
+
+#createdby a:hover {
+    color: black;
+}

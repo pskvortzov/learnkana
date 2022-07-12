@@ -4,11 +4,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Learn Kana</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<div id="kana"></div>
-	<audio src="click.wav" />
-	<script src="script.js"></script>
+	<div id="buttons">
+		<button data-option="hiragana">Hiragana</button>
+		<button data-option="katakana">Katakana</button>
+		<button data-option="hentaigana">Hentaigana</button>
+	</div>
+
+	<div id="glyph"><span id="kana">&nbsp;</span><span id="reading">&nbsp;</span></div>
+
+	<audio id="click" src="sounds/click.wav"></audio>
+
+	<p id="createdby">Created by <a target="_blank" href="https://github.com/pskvortzov">Pavel Skvortsov</a></p>
+	<script src="scripts/script.js"></script>
 </body>
 </html>
