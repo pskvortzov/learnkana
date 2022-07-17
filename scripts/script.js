@@ -18,13 +18,15 @@ recognition.maxAlternatives = 10;
 recognition.lang = 'zh-CN';
 
 document.addEventListener('keydown', pressKey);
-document.querySelectorAll('#buttons button').forEach(element => element.addEventListener('click', pressButton));
+document.querySelectorAll('#buttons button')
+	.forEach(element => element.addEventListener('click', pressButton));
 
 recognition.addEventListener('result', parseResults);
 recognition.addEventListener('audiostart', () => speechStartGlyph = currentGlyph);
 recognition.addEventListener('audioend', wrongAnswer)
 recognition.addEventListener('end', recognition.start);
 
+setupStyles();
 
 function getRandomGlyph() {
 	if (keys.length == 0) {
@@ -90,10 +92,17 @@ function pressButton(event) {
 
 	getRandomGlyph();
 
-	buttons.style.display = 'none';
-	checkbox.style.display = 'none';
-	glyph.style.display = 'block';
-	glyph.style.opacity = 1;
+	buttons.classList.remove('visible');
+	checkbox.classList.remove('visible');
+	buttons.classList.add('hidden');
+	checkbox.classList.add('hidden');
+
+	buttons.addEventListener('transitionend', () => {
+		buttons.style.display = 'none';
+		checkbox.style.display = 'none';
+		glyph.style.transition = 'all .4s';
+		glyph.style.opacity = 1;
+	});
 }
 
 function pressKey(event) {
@@ -585,4 +594,16 @@ function getPronunciationVariants(syllable) {
 	};
 
 	return syllables[syllable];
+}
+
+function setupStyles() {
+	buttons.style.transition = 'all .4s';
+	checkbox.style.transition = 'all .4s';
+
+	buttons.classList.remove('hidden');
+	checkbox.classList.remove('hidden');
+	buttons.classList.add('visible');
+	checkbox.classList.add('visible');
+
+	document.querySelector('#createdby a').style.transition = 'all .4s';
 }

@@ -7,14 +7,15 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<div id="buttons">
+	<div id="buttons" class="hidden">
 		<button data-option="hiragana">Hiragana</button>
 		<button data-option="katakana">Katakana</button>
 		<button data-option="hentaigana">Hentaigana</button>
 	</div>
 
-	<div id="checkbox">
-		<label for="learningMode"><input type="checkbox" name="learningMode" id="learningMode" /> Learning Mode</label>
+	<div id="checkbox" class="hidden">
+		<input type="checkbox" name="learningMode" id="learningMode" />
+		<label for="learningMode">Learning Mode</label>
 	</div>
 
 	<div id="glyph"><span id="kana">&nbsp;</span><span id="reading">&nbsp;</span></div>

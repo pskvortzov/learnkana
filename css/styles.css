@@ -24,11 +24,10 @@ body {
 }
 
 #buttons {
-    margin-top: -20%;
+    margin-top: -20px;
 }
 
 #buttons button {
-    transition: all .3s;
 	cursor: pointer;
     border: 1px solid #ccc;
     padding: 10px 15px;
@@ -44,19 +43,32 @@ body {
 }
 
 #checkbox {
+    z-index: 1;
     margin-top: 1em;
     color: #666;
     font-size: .8em;
 }
 
 
+#checkbox label {
+    vertical-align: top;
+}
+
 #checkbox label, #checkbox input {
     cursor:  pointer;
 }
 
+.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.hidden {
+    opacity: 0 !important;
+    transform: translateY(-30px) !important;
+}
+
 #glyph {
-    transition: all .3s;
-	display: none;
 	opacity: 0;
 	position:  relative;
 	cursor: default;
@@ -103,7 +115,6 @@ body {
 }
 
 #createdby a {
-    transition: all .3s;
 	color: #aaa;
 }
 
